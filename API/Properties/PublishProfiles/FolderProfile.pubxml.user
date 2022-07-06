@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>F:\Angular\IIS\Chiyu\API</_PublishTargetUrl>
+    <History>True|2021-12-04T06:43:12.0970305Z;True|2021-12-02T15:09:28.8216150+07:00;True|2021-12-02T15:09:02.0671745+07:00;True|2021-07-14T08:57:11.8748672+07:00;</History>
+  </PropertyGroup>
+</Project>

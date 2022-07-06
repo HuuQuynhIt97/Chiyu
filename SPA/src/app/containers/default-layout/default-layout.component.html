@@ -1,0 +1,176 @@
+<ngx-spinner [fullScreen]="true" type="square-jelly-box" size="medium">
+</ngx-spinner>
+<app-header [navbarBrandRouterLink]="['/']" [fixed]="true"
+  [navbarBrandFull]="{src: 'assets/img/logo.png', width: 50, height: 25, alt: 'Logo'}"
+  [navbarBrandMinimized]="{src: 'assets/img/logo.png', width: 25, height: 25, alt: 'Logo'}" [sidebarToggler]="'lg'"
+  [asideMenuToggler]="'lg'"
+  [asideMenuToggler]="false"
+  [mobileAsideMenuToggler]="false"
+  >
+  <ul class="nav navbar-nav nav-link-dark d-md-down-none">
+    <li class="nav-item">
+      <a class="nav-link font-2xl" href="/">Chiyu</a>
+    </li>
+  </ul>
+  <ul class="nav navbar-nav ml-auto p-0">
+    <!-- <li class="nav-item d-md-down-none mr-2">
+      <a class="nav-link">
+
+        <button type="button" (click)='openModal(versionHistoryModal)' class="btn btn-info text-white">Version
+          <span class="badge-pill" style="background-color: white; color:#63c2de;">{{firstItem?.name}}</span></button>
+      </a>
+    </li>
+    <li class="nav-item d-md-down-none mr-2">
+      <a class="nav-link">
+        <button type="button" (click)='openModal(versionHistoryModal)' class="btn btn-info text-white">Uploaded Time
+          <span class="badge-pill" style="background-color: white; color:#63c2de;">{{firstItem?.createdTime | date: 'YYYY-MM-dd HH:mm'}}</span></button>
+      </a>
+    </li> -->
+    <li class="nav-item d-md-down-none mr-2" style="width: 70px;">
+      <div class="nav-link">
+        <!-- <ejs-dropdownlist id='langs' #langs [dataSource]='langsData' (change)='onChange($event)' [value]='value'
+        [fields]='fields'></ejs-dropdownlist> -->
+      </div>
+    </li>
+    <li class="nav-item d-md-down-none mr-2">
+      <a class="nav-link">
+        <!-- <span class="font-weight-bold text-info">{{currentTime}}</span> -->
+        <h4 class="font-weight-bold text-info">{{currentTime}}</h4>
+      </a>
+    </li>
+
+    <li class="nav-item dropdown" style="cursor: pointer;">
+      <a class="nav-link font-weight-bold" data-toggle="dropdown">
+        {{userName | titlecase}}
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" (click)="logout()">
+          <i class="fa fa-lock"></i>
+          Sign-out
+        </a>
+      </div>
+    </li>
+  </ul>
+</app-header>
+<div class="app-body">
+  <!-- <app-sidebar #appSidebar [fixed]="true" [display]='false' [minimized]="sidebarMinimized"
+    (minimizedChange)="toggleMinimize($event)">
+    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
+  </app-sidebar> -->
+  <main class="main">
+
+    <cui-breadcrumb>
+
+    </cui-breadcrumb>
+
+    <div class="container-fluid">
+      <div class="card">
+        <!-- <div class="card-header">
+          <h3>{{'INCOMING_LABEL' | translate}}</h3>
+        </div> -->
+        <div class="card-body">
+          <div class="row mb-2">
+            <div class="col-md-12 d-flex justify-content-center align-items-center">
+
+              <div class="font-weight-bold pr-3">Department:</div>
+              <ejs-dropdownlist #ddlelement [dataSource]='buildings' [fields]='fieldsBuildings' [allowFiltering]='true'
+                [value]='buildingID' (filtering)='onFilteringBuilding($event)' (change)='onChangeBuilding($event)'
+                placeholder="{{'Select a department'}}">
+              </ejs-dropdownlist>
+
+              <div style="color: transparent;" class="font-weight-bold pr-3">|</div>
+              <!-- <button class="btn btn-sm btn-secondary" (click)='onClickDefault()'>
+                <i class="fa fa-times"></i>
+              </button> -->
+
+              <button (click)="onClickDefault()"  type="button" class="btn bg-teal  ">
+                <i class="fa fa-refresh"></i> Refresh
+              </button>
+
+              <div class="font-weight-bold px-3">Start Time:</div>
+              <ejs-datepicker class="pr-3" [value]='startDate' (change)='startDateOnchange($event)'
+              [(ngModel)]='startDate'></ejs-datepicker>
+
+              <div class="font-weight-bold pr-3">End Time:</div>
+              <ejs-datepicker class="pr-3" [value]='endDate' (change)='endDateOnchange($event)' [(ngModel)]='endDate'>
+              </ejs-datepicker>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-12">
+
+              <ejs-grid #ingredientinfoGrid id="grid" [dataSource]='data' (dataBound)='dataBound()'
+                [allowExcelExport]='true' [allowSorting]='true'  allowResizing='true' allowFiltering='true' [filterSettings]='filterSettings'
+                [toolbar]='toolbarOptions' showColumnMenu='true' [pageSettings]='pageSettings' (created)="createdSearch($event)"
+                allowPaging="true" gridLines='Both' (toolbarClick)='toolbarClick($event)' [searchSettings]='searchOptions'>
+                <e-columns>
+
+                  <e-column field='guestID' textAlign='Center' headerText='EmployeeID' width='150'></e-column>
+
+                  <!-- <e-column field='cardNo' textAlign='Center' headerText='CardNo' width='120'> </e-column> -->
+
+                  <e-column field='guestName' textAlign='Center' headerText='GuestName' width='120'></e-column>
+
+                  <e-column field='department' textAlign='Center' headerText='Department' width='100'></e-column>
+
+                  <e-column field='date' textAlign='Center' headerText='Date' width='130'> </e-column>
+
+                  <e-column field='time' textAlign='Center' headerText='Time' width='130'></e-column>
+
+                  <e-column field='entryDoor' textAlign='Center' headerText='EntryDoor' width='100'></e-column>
+
+                  <e-column field='eventDescription' textAlign='Center' headerText='EventDescription' ></e-column>
+
+                  <e-column field='verificationSource' textAlign='Center' headerText='VerificationSource'></e-column>
+
+                </e-columns>
+              </ejs-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <router-outlet></router-outlet> -->
+    </div>
+  </main>
+
+</div>
+<app-footer>
+  <span><a href="/">Copyright © 2021 SHYANG HUNG CHENG INDUSTRIAL CO., LTD All </a> &copy; Right reserved.</span>
+  <span class="ml-auto mr-2">Powered by <a target="_blank" href="http://10.4.5.174:93">Lab-team</a></span>
+  <i class="fa fa-users"></i> {{online}}
+</app-footer>
+
+<ng-template #versionHistoryModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title ml-1">
+      Version History
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+
+        <div *ngFor="let item of data">
+
+          <div class="callout callout-info">
+            <h1>{{item.name}} ({{item.upatedTime | date: 'YYYY-MM-dd HH:mm'}})</h1>
+            <div [innerHTML]="item.description"></div>
+            <p><label for="Name">Upload by:</label> {{item.uploadBy}}</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</ng-template>
